@@ -9,6 +9,9 @@ void clFinanceAssistant::userRegistration(){
 
 void clFinanceAssistant::loginForm(){
     userManager.loginForm();
+    if(userManager.ifUserLoggedIn()){
+        incomeManager=new IncomeManager(INCOMES_FILE_NAME, userManager.getIdLoggedUser());
+    }
 }
 
 void clFinanceAssistant::userLogout(){
@@ -59,7 +62,14 @@ char clFinanceAssistant::userMenu(){
 void clFinanceAssistant::resetPassword(){
     userManager.resetPassword();
 }
+
+void clFinanceAssistant::addIncome(){
+    incomeManager->addIncome();
+}
 /*******************************************/
 void clFinanceAssistant::wypiszUzytkownikow(){
     userManager.wypiszUzytkownikow();
+}
+void clFinanceAssistant::wypiszIncome(){
+    incomeManager->wypiszIncome();
 }
