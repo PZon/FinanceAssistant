@@ -31,55 +31,61 @@ void IncomeFile::saveIncomeToFile(Income income){
         xml.AddElem("idUser",income.getIdUser());
         xml.AddElem("date",income.getTransactionDate());
         xml.AddElem("description",income.getDescription());
-        xml.AddElem("amount",income.getIncomeAmount());
+        xml.AddElem("amount",SupportiveMethods::convertFloatToStr(income.getIncomeAmount()));
 
         xml.Save(INCOMES_FILE_NAME.c_str());
         xmlFile.close();
     }
+    lastIncomeId++;
 }
 
-/*
-vector<User>UsersFile::uploadUsersFromFile(){
+
+vector<Income>IncomeFile::uploadIncomesFromFile(int loggedUserId){
     CMarkup xml;
     fstream xmlFile;
-    User user;
-    vector<User>users;
+    Income income;
+    vector<Income>incomes;
 
-    xmlFile.open(USERS_FILE_NAME.c_str(), ios::in);
-    xml.Load(USERS_FILE_NAME.c_str());
+    xmlFile.open(INCOMES_FILE_NAME.c_str(), ios::in);
+    xml.Load(INCOMES_FILE_NAME.c_str());
     if(xmlFile.good()==true){
         xml.ResetPos();
-        xml.FindElem();//users
+        xml.FindElem();//INCOMES
         xml.IntoElem();
 
-        while (xml.FindElem("User")){
+        while (xml.FindElem("Income")){
             xml.IntoElem();
-            xml.FindElem("id");
-            user.setId(atoi(MCD_2PCSZ(xml.GetData())));
+            xml.FindElem("idIncome");
+            lastIncomeId=atoi(MCD_2PCSZ(xml.GetData()));
+            income.setIdIncome(atoi(MCD_2PCSZ(xml.GetData())));
             xml.ResetMainPos();
 
-            xml.FindElem("name");
-            user.setName(xml.GetData());
+            xml.FindElem("idUser");
+            income.setIdUser(atoi(MCD_2PCSZ(xml.GetData())));
             xml.ResetMainPos();
 
-            xml.FindElem("surname");
-            user.setSurname(xml.GetData());
+            xml.FindElem("date");
+            income.setTransactionDate(atoi(MCD_2PCSZ(xml.GetData())));
             xml.ResetMainPos();
 
-            xml.FindElem("nick");
-            user.setNick(xml.GetData());
+            xml.FindElem("description");
+            income.setDescription(xml.GetData());
             xml.ResetMainPos();
 
-            xml.FindElem("password");
-            user.setPassword(xml.GetData());
+            xml.FindElem("amount");
+            income.setTransactionDate(atof(MCD_2PCSZ(xml.GetData())));
+            //income.setTransactionDate(atof(xml.GetData().c_str()));
             xml.ResetMainPos();
 
-            users.push_back(user);
+            incomes.push_back(income);
             xml.OutOfElem();
         }
 
         xmlFile.close();
     }
-    return users;
+    return incomes;
 }
-*/
+
+int IncomeFile::setLastIncomeId(){
+        return lastIncomeId+1;
+}

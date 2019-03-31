@@ -6,6 +6,7 @@
 #include <sstream>
 #include "Markup.h"
 #include "Income.h"
+#include "SupportiveMethods.h"
 
 using namespace std;
 class IncomeFile{
@@ -18,7 +19,8 @@ public:
         lastIncomeId=0;
     }
     void saveIncomeToFile(Income income);
-   // vector<Income>uploadIncomesFromFile(Income income);
+    vector<Income>uploadIncomesFromFile(int loggedUserId);
+    int setLastIncomeId();
 };
 
 #endif
