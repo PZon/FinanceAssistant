@@ -6,34 +6,57 @@ using namespace std;
 
 void IncomeManager::addIncome(){
     Income income=enterNewIncomeData();
-
-    incomes.push_back(income);
-    incomeFile.saveIncomeToFile(income);
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
-    cout<<"\n Your income has been saved.\n";
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
-    system ("pause");
+    if(income.getDescription()==""){cout<<"\nError";system ("pause");
+    }else{
+        incomes.push_back(income);
+        incomeFile.saveIncomeToFile(income);
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
+        cout<<"\n Your income has been saved.\n";
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+        system ("pause");
+    }
 }
 
 Income IncomeManager::enterNewIncomeData(){
     Income income;
+    char choice;
     int transactionDate;
+    string strTransDate=SupportiveMethods::strCurrentDate('-');
     string description;
     float incomeAmount;
-    income.setIdIncome(setNewIncomeId());
-    income.setIdUser(LOGGED_USER_ID);
-    cout<<"Enter transaction date (YYYY-MM-DD): ";
-    cin>>transactionDate; income.setTransactionDate(transactionDate);
-    cout<<"Enter short transaction desription: ";
-    cin>>description; income.setDescription(description);
-    cout<<"Enter amount: ";
-    cin>>incomeAmount; income.setIncomeAmount(incomeAmount);
-    return income;
-}
+    bool dateVeryfication=false;
 
-int IncomeManager::setNewIncomeId(){
-    if(incomes.empty()==true) return 1;
-    else return incomes.back().getIdIncome()+1;
+    income.setIdIncome(incomeFile.setLastIncomeId());
+    income.setIdUser(LOGGED_USER_ID);
+    cout<<"\nWhat is transaction date\n";
+    cout<<"1. Current date: "<<strTransDate<<" "<<endl;
+    cout<<"2. Preferred specific date.\n";
+    cout<<"===========================================\n";
+    cout<<"Your choice: ";
+    choice = SupportiveMethods::verifyChar();
+        switch(choice){
+        case '1':
+            strTransDate=SupportiveMethods::strCurrentDate('0');
+            dateVeryfication=true;
+            break;
+        case '2':
+            cout<<"Enter transaction date (YYYY-MM-DD): ";
+            strTransDate=SupportiveMethods::getTxtLine();
+            dateVeryfication=SupportiveMethods::verifyUserDate(strTransDate);
+            break;
+        }
+
+        if(dateVeryfication==true){
+            strTransDate=SupportiveMethods::removePauses(strTransDate);
+            transactionDate=SupportiveMethods::convertStringToInt(strTransDate);
+            income.setTransactionDate(transactionDate);
+            cout<<"Enter short transaction description: ";
+            description=SupportiveMethods::getTxtLine();
+            income.setDescription(description);
+            cout<<"Enter amount: ";
+            cin>>incomeAmount; income.setIncomeAmount(incomeAmount);
+            return income;
+        }else cout<<"\nWrong date!!!";
 }
 /*********************************************/
 void IncomeManager::wypiszIncome(){

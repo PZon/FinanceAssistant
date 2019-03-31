@@ -4,6 +4,7 @@
 #include <vector>
 #include "Income.h"
 #include "IncomeFile.h"
+#include "SupportiveMethods.h"
 
 using namespace std;
 class IncomeManager{
@@ -14,12 +15,11 @@ class IncomeManager{
 public:
     IncomeManager(string incomesFileName, int loggedUserId):incomeFile(incomesFileName),
     LOGGED_USER_ID(loggedUserId){
-        //incomes=zaladuja dane do vectora(LOGGED_USER_ID);
+     incomes=incomeFile.uploadIncomesFromFile(LOGGED_USER_ID);
     }
 
     void addIncome();
     Income enterNewIncomeData();
-    int setNewIncomeId();
     /***************************************/
     void wypiszIncome();
 
