@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     char choice;
-    clFinanceAssistant financeAssistant("Users.xml", "Incomes.xml");
+    clFinanceAssistant financeAssistant("Users.xml", "Incomes.xml","Expenses.xml");
     financeAssistant.ifUserLoggedIn();
     while(true){
         if(financeAssistant.ifUserLoggedIn()==false){
@@ -30,7 +30,7 @@ int main()
                 financeAssistant.addIncome();
                 break;
             case '2':
-                //financeAssistant.Dodaj wydatek;
+                financeAssistant.addExpense();
                 break;
             case '3':
                 //financeAssistant.bilans z aktualnego miesiaca;
@@ -51,6 +51,8 @@ int main()
                 financeAssistant.wypiszUzytkownikow();
                 cout<<endl<<"=================================\n";
                 financeAssistant.wypiszIncome();
+                cout<<endl<<"=================================\n";
+                financeAssistant.wypiszExpense();
                 break;
             }
         }
