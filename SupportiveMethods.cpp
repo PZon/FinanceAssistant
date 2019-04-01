@@ -60,6 +60,7 @@ string SupportiveMethods::strCurrentDate(char key){
     strD=convertIntToStr(day);
 
     if(strM.length()==1) strM='0'+strM;
+    if(strD.length()==1) strD='0'+strD;
     if(key=='-')strDate=strY+'-'+strM+'-'+strD;
     else if(key=='0') strDate=strY+strM+strD;
     else if(key=='Y') strDate=strY;
@@ -119,4 +120,21 @@ string SupportiveMethods::removePauses(string strTransDate){
         }else continue;
     }
     return transDate;
+}
+
+bool SupportiveMethods::verifyAmount(string strAmount){
+    int noneDigitNr=0;
+     for (int i=0; i<strAmount.length(); i++){
+        if(!(isdigit(strAmount[i]))) noneDigitNr++;
+    }
+    if(noneDigitNr>1)return false;
+    else return true;
+}
+string SupportiveMethods::swapCommaWithDot(string strAmount){
+    int index=0;
+    index=strAmount.find(',');
+    if(index>0){
+        strAmount.replace(index,1,1,'.');
+    }
+    return strAmount;
 }

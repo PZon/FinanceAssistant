@@ -20,6 +20,8 @@ public:
    static bool verifyUserDate(string strUserDate);
    static bool leapYear(string year);
    static string removePauses(string strTransDate);
+   static bool verifyAmount(string strAmount);
+   static string swapCommaWithDot(string strAmount);
 };
 
 #endif
