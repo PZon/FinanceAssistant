@@ -2,6 +2,7 @@
 #include "UserManager.h"
 #include "IncomeManager.h"
 #include "ExpenseManager.h"
+#include "SupportiveMethods.h"
 
 using namespace std;
 
@@ -36,6 +37,10 @@ public:
     void resetPassword();
     void addIncome();
     void addExpense();
+    void statementCurrentMonth();
+    void statementPreviousMonth();
+    void statementSpecificPeriod();
+    void displayStatement(int startD, int endD);
 
     /****************************************/
     void wypiszUzytkownikow();

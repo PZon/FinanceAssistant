@@ -20,6 +20,7 @@ public:
 
     void addIncome();
     Income enterNewIncomeData();
+    int displayIncome(int startD, int endD);
     /***************************************/
     void wypiszIncome();
 

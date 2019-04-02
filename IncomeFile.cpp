@@ -45,42 +45,53 @@ vector<Income>IncomeFile::uploadIncomesFromFile(int loggedUserId){
     fstream xmlFile;
     Income income;
     vector<Income>incomes;
+    int tmpUserId;
 
     xmlFile.open(INCOMES_FILE_NAME.c_str(), ios::in);
     xml.Load(INCOMES_FILE_NAME.c_str());
     if(xmlFile.good()==true){
         xml.ResetPos();
-        xml.FindElem();//INCOMES
+        xml.FindElem();
         xml.IntoElem();
 
         while (xml.FindElem("Income")){
             xml.IntoElem();
             xml.FindElem("idIncome");
             lastIncomeId=atoi(MCD_2PCSZ(xml.GetData()));
-            income.setIdIncome(atoi(MCD_2PCSZ(xml.GetData())));
             xml.ResetMainPos();
-
+            xml.IntoElem();
             xml.FindElem("idUser");
-            income.setIdUser(atoi(MCD_2PCSZ(xml.GetData())));
-            xml.ResetMainPos();
+            tmpUserId=atoi(MCD_2PCSZ(xml.GetData()));
 
-            xml.FindElem("date");
-            income.setTransactionDate(atoi(MCD_2PCSZ(xml.GetData())));
-            xml.ResetMainPos();
+           if(loggedUserId==tmpUserId){
+                xml.ResetMainPos();
+                xml.IntoElem();
+                xml.FindElem("idIncome");
+                //lastIncomeId=atoi(MCD_2PCSZ(xml.GetData()));
+                //income.setIdIncome(atoi(MCD_2PCSZ(xml.GetData())));
+                income.setIdIncome(lastIncomeId);
+                xml.ResetMainPos();
 
-            xml.FindElem("description");
-            income.setDescription(xml.GetData());
-            xml.ResetMainPos();
+                xml.FindElem("idUser");
+                income.setIdUser(atoi(MCD_2PCSZ(xml.GetData())));
+                xml.ResetMainPos();
 
-            xml.FindElem("amount");
-            income.setTransactionDate(atof(MCD_2PCSZ(xml.GetData())));
-            //income.setTransactionDate(atof(xml.GetData().c_str()));
-            xml.ResetMainPos();
+                xml.FindElem("date");
+                income.setTransactionDate(atoi(MCD_2PCSZ(xml.GetData())));
+                xml.ResetMainPos();
 
-            incomes.push_back(income);
+                xml.FindElem("description");
+                income.setDescription(xml.GetData());
+                xml.ResetMainPos();
+
+                xml.FindElem("amount");
+                income.setIncomeAmount(atof(MCD_2PCSZ(xml.GetData())));
+                xml.ResetMainPos();
+
+                incomes.push_back(income);
+            }//endif;
             xml.OutOfElem();
         }
-
         xmlFile.close();
     }
     return incomes;

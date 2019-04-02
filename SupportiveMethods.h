@@ -22,6 +22,8 @@ public:
    static string removePauses(string strTransDate);
    static bool verifyAmount(string strAmount);
    static string swapCommaWithDot(string strAmount);
+   static string addDashToDate(int intDate);
+   static int getDate(char key);
 };
 
 #endif

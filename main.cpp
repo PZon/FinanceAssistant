@@ -33,13 +33,13 @@ int main()
                 financeAssistant.addExpense();
                 break;
             case '3':
-                //financeAssistant.bilans z aktualnego miesiaca;
+                financeAssistant.statementCurrentMonth();
                 break;
             case '4':
-                //financeAssistant.bilans z poprzedniego miesiaca;
+                financeAssistant.statementPreviousMonth();
                 break;
             case '5':
-                //financeAssistant.bilans za wybrany okres;
+                financeAssistant.statementSpecificPeriod();
                 break;
             case '6':
                 financeAssistant.resetPassword();
