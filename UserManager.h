@@ -29,10 +29,6 @@ public:
     bool ifUserLoggedIn();
     void userLogout();
     void resetPassword();
-
-    /************************/
-    void wypiszUzytkownikow();
-
 };
 
 #endif

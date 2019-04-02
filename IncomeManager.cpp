@@ -78,8 +78,8 @@ Income IncomeManager::enterNewIncomeData(){
         return income;
 }
 
-int IncomeManager::displayIncome(int startD, int endD){
-    float sumIncomes=0;
+float IncomeManager::displayIncome(int startD, int endD){
+    float sumIncomes=0.00;
     int intDate; string strDate;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),2);
     cout<<"\n\tINCOMES: \n";
@@ -90,21 +90,12 @@ int IncomeManager::displayIncome(int startD, int endD){
             intDate=incomes[i].getTransactionDate();
             strDate=SupportiveMethods::addDashToDate(intDate);
             cout<<incomes[i].getIdIncome()<<"  | "<<strDate
-            <<" | "<<incomes[i].getDescription()<<"  |   "<<incomes[i].getIncomeAmount()<<"euro"<<endl;
+            <<" | "<<incomes[i].getDescription()<<"  |   "<<incomes[i].getIncomeAmount()<<" euro"<<endl;
             sumIncomes+=incomes[i].getIncomeAmount();
        }
     }
     cout<<"======================================="<<endl;
-    cout<<"Total Income: "<<sumIncomes<<"euro\n"<<endl;
+    cout<<"Total Income: "<<sumIncomes<<" euro\n"<<endl;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
     return sumIncomes;
-}
-/*********************************************/
-void IncomeManager::wypiszIncome(){
-    for(int i=0; i<incomes.size(); i++){
-        cout<<incomes[i].getIdIncome()<<"|"<<incomes[i].getIdUser()
-        <<"|"<<incomes[i].getTransactionDate()<<"|"<<incomes[i].getDescription()<<"|"
-        <<incomes[i].getIncomeAmount()<<endl;
-    }
-    system("pause");
 }

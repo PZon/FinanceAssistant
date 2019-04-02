@@ -1,4 +1,6 @@
 #include <iostream>
+#include <windows.h>
+#include <iomanip>
 #include "UserManager.h"
 #include "IncomeManager.h"
 #include "ExpenseManager.h"
@@ -41,11 +43,4 @@ public:
     void statementPreviousMonth();
     void statementSpecificPeriod();
     void displayStatement(int startD, int endD);
-
-    /****************************************/
-    void wypiszUzytkownikow();
-    void wypiszIncome();
-    void wypiszExpense();
-
-
 };

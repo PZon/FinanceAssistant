@@ -47,18 +47,9 @@ int main()
             case '0':
                 financeAssistant.userLogout();
                 break;
-            case '9':
-                financeAssistant.wypiszUzytkownikow();
-                cout<<endl<<"=================================\n";
-                financeAssistant.wypiszIncome();
-                cout<<endl<<"=================================\n";
-                financeAssistant.wypiszExpense();
-                break;
+
             }
         }
     }
-
-    /******************************************/
-    //financeAssistant.wypiszUzytkownikow();
     return 0;
 }

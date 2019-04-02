@@ -78,8 +78,8 @@ Expense ExpenseManager::enterNewExpenseData(){
         return expense;
 }
 
-int ExpenseManager::displayExpense(int startD, int endD){
-    float sumExpenses=0;
+float ExpenseManager::displayExpense(int startD, int endD){
+    float sumExpenses=0.00;
     int intDate; string strDate;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),6);
     cout<<"\tEXPENSES: \n";
@@ -90,23 +90,12 @@ int ExpenseManager::displayExpense(int startD, int endD){
             intDate=expenses[i].getTransactionDate();
             strDate=SupportiveMethods::addDashToDate(intDate);
             cout<<expenses[i].getIdExpense()<<"  | "<<strDate<<" | "
-            <<expenses[i].getDescription()<<"  |   "<<expenses[i].getExpenseAmount()<<"euro"<<endl;
+            <<expenses[i].getDescription()<<"  |   "<<expenses[i].getExpenseAmount()<<" euro"<<endl;
             sumExpenses+=expenses[i].getExpenseAmount();
        }
     }
     cout<<"======================================="<<endl;
-    cout<<"Total Expenses: "<<sumExpenses<<"euro"<<endl;
+    cout<<"Total Expenses: "<<sumExpenses<<" euro"<<endl;
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
-        system("pause");
     return sumExpenses;
-
-}
-/*********************************************/
-void ExpenseManager::wypiszExpense(){
-    for(int i=0; i<expenses.size(); i++){
-        cout<<expenses[i].getIdExpense()<<"|"<<expenses[i].getIdUser()
-        <<"|"<<expenses[i].getTransactionDate()<<"|"<<expenses[i].getDescription()<<"|"
-        <<expenses[i].getExpenseAmount()<<endl;
-    }
-    system("pause");
 }

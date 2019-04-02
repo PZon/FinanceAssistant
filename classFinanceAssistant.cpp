@@ -52,7 +52,6 @@ char clFinanceAssistant::userMenu(){
     cout << "---------------------------" << endl;
     cout << "6. Change password" << endl;
     cout << "0. Log Out" << endl;
-    cout << "9. wyswietl test" << endl;
     cout << "---------------------------" << endl;
     cout << "Your choice: ";
     choice = SupportiveMethods::verifyChar();
@@ -96,18 +95,23 @@ void clFinanceAssistant::statementSpecificPeriod(){
 };
 
 void clFinanceAssistant::displayStatement(int startD, int endD){
+    float incomes, expenses, sum;
+    incomes=incomeManager->displayIncome(startD,endD);
+    expenses=expenseManager->displayExpense(startD,endD);
+    sum=incomes-expenses;
+    system("cls");
     cout<<"Statement for period from "<<SupportiveMethods::addDashToDate(startD)<<" to "<<SupportiveMethods::addDashToDate(endD)<<endl;
     incomeManager->displayIncome(startD,endD);
     expenseManager->displayExpense(startD,endD);
-}
-/*******************************************/
-void clFinanceAssistant::wypiszUzytkownikow(){
-    userManager.wypiszUzytkownikow();
-}
-void clFinanceAssistant::wypiszExpense(){
-    expenseManager->wypiszExpense();
-}
 
-void clFinanceAssistant::wypiszIncome(){
-    incomeManager->wypiszIncome();
+    if(sum>0){
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
+        cout<<"\n\nTOTAL: "<<setprecision(2)<<fixed<<sum<<" euro"<<endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+    }else{
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
+        cout<<"\n\nTOTAL: "<<setprecision(2)<<fixed<<sum<<" euro"<<endl;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+    }
+    system("pause");
 }

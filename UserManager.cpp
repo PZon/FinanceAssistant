@@ -113,12 +113,3 @@ void UserManager::resetPassword(){
     }
     usersFile.updateUserPassword(loggedUserId, newPassword);
 }
-
-/*********************************************/
-void UserManager::wypiszUzytkownikow(){
-     for(int i=0; i<users.size(); i++){
-        cout<<users[i].getId()<<"|"<<users[i].getName()
-        <<"|"<<users[i].getSurname()<<"|"<<users[i].getNick()<<"|"<<users[i].getPassword()<<endl;
-    }
-    system("pause");
-}
