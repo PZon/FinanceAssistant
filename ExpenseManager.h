@@ -20,6 +20,7 @@ public:
 
     void addExpense();
     Expense enterNewExpenseData();
+    int displayExpense(int startD, int endD);
     /***************************************/
     void wypiszExpense();
 

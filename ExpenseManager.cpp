@@ -77,6 +77,30 @@ Expense ExpenseManager::enterNewExpenseData(){
             }while(amountVeryfication==false);
         return expense;
 }
+
+int ExpenseManager::displayExpense(int startD, int endD){
+    float sumExpenses=0;
+    int intDate; string strDate;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),6);
+    cout<<"\tEXPENSES: \n";
+    cout<<"Id |    Date    | Description | Amount "<<endl;
+    cout<<"======================================="<<endl;
+    for(int i=0; i<expenses.size(); i++){
+        if((expenses[i].getTransactionDate()>=startD)&&(expenses[i].getTransactionDate()<=endD)){
+            intDate=expenses[i].getTransactionDate();
+            strDate=SupportiveMethods::addDashToDate(intDate);
+            cout<<expenses[i].getIdExpense()<<"  | "<<strDate<<" | "
+            <<expenses[i].getDescription()<<"  |   "<<expenses[i].getExpenseAmount()<<"euro"<<endl;
+            sumExpenses+=expenses[i].getExpenseAmount();
+       }
+    }
+    cout<<"======================================="<<endl;
+    cout<<"Total Expenses: "<<sumExpenses<<"euro"<<endl;
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+        system("pause");
+    return sumExpenses;
+
+}
 /*********************************************/
 void ExpenseManager::wypiszExpense(){
     for(int i=0; i<expenses.size(); i++){

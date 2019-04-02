@@ -45,42 +45,53 @@ vector<Expense>ExpenseFile::uploadExpensesFromFile(int loggedUserId){
     fstream xmlFile;
     Expense expense;
     vector<Expense>expenses;
+    int tmpUserId;
 
     xmlFile.open(EXPENSES_FILE_NAME.c_str(), ios::in);
     xml.Load(EXPENSES_FILE_NAME.c_str());
     if(xmlFile.good()==true){
         xml.ResetPos();
-        xml.FindElem();//expenseS
+        xml.FindElem();
         xml.IntoElem();
 
         while (xml.FindElem("Expense")){
             xml.IntoElem();
             xml.FindElem("idExpense");
             lastExpenseId=atoi(MCD_2PCSZ(xml.GetData()));
-            expense.setIdExpense(atoi(MCD_2PCSZ(xml.GetData())));
             xml.ResetMainPos();
-
+            xml.IntoElem();
             xml.FindElem("idUser");
-            expense.setIdUser(atoi(MCD_2PCSZ(xml.GetData())));
-            xml.ResetMainPos();
+            tmpUserId=atoi(MCD_2PCSZ(xml.GetData()));
 
-            xml.FindElem("date");
-            expense.setTransactionDate(atoi(MCD_2PCSZ(xml.GetData())));
-            xml.ResetMainPos();
+            if(loggedUserId==tmpUserId){
+                xml.ResetMainPos();
+                xml.IntoElem();
+                xml.FindElem("idExpense");
+                //lastExpenseId=atoi(MCD_2PCSZ(xml.GetData()));
+               // expense.setIdExpense(atoi(MCD_2PCSZ(xml.GetData())));
+                expense.setIdExpense(lastExpenseId);
+                xml.ResetMainPos();
 
-            xml.FindElem("description");
-            expense.setDescription(xml.GetData());
-            xml.ResetMainPos();
+                xml.FindElem("idUser");
+                expense.setIdUser(atoi(MCD_2PCSZ(xml.GetData())));
+                xml.ResetMainPos();
 
-            xml.FindElem("amount");
-            expense.setTransactionDate(atof(MCD_2PCSZ(xml.GetData())));
-            //expense.setTransactionDate(atof(xml.GetData().c_str()));
-            xml.ResetMainPos();
+                xml.FindElem("date");
+                expense.setTransactionDate(atoi(MCD_2PCSZ(xml.GetData())));
+                xml.ResetMainPos();
 
-            expenses.push_back(expense);
+                xml.FindElem("description");
+                expense.setDescription(xml.GetData());
+                xml.ResetMainPos();
+
+                xml.FindElem("amount");
+                expense.setExpenseAmount(atof(MCD_2PCSZ(xml.GetData())));
+                xml.ResetMainPos();
+
+                expenses.push_back(expense);
+            }
             xml.OutOfElem();
         }
-
         xmlFile.close();
     }
     return expenses;

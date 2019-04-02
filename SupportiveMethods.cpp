@@ -46,7 +46,7 @@ int SupportiveMethods::convertStringToInt(string strNr){
 }
 
 string SupportiveMethods::strCurrentDate(char key){
-    string strDate,strY,strM,strD;
+    string strDate,strY,strM,strD, strMPrev, strYPrev;
     time_t timeNow=time(0);
     int year, month, day;
 
@@ -58,13 +58,22 @@ string SupportiveMethods::strCurrentDate(char key){
     strY=convertIntToStr(year);
     strM=convertIntToStr(month);
     strD=convertIntToStr(day);
-
+    strMPrev=convertIntToStr(month-1);
+    strYPrev=convertIntToStr(year-1);
     if(strM.length()==1) strM='0'+strM;
+    if(strMPrev.length()==1) strMPrev='0'+strMPrev;
     if(strD.length()==1) strD='0'+strD;
+
     if(key=='-')strDate=strY+'-'+strM+'-'+strD;
     else if(key=='0') strDate=strY+strM+strD;
     else if(key=='Y') strDate=strY;
     else if(key=='M') strDate=strM;
+    else if(key=='P'){
+      if(strMPrev=="00"){
+        strMPrev="12";
+        strDate=strYPrev+strMPrev+strD;
+      }else strDate=strY+strMPrev+strD;
+    }
     return strDate;
 }
 
@@ -137,4 +146,27 @@ string SupportiveMethods::swapCommaWithDot(string strAmount){
         strAmount.replace(index,1,1,'.');
     }
     return strAmount;
+}
+
+int SupportiveMethods::getDate(char key){
+    string strDate;
+    int intDate,startDate, endDate;
+
+    if(key=='C'){
+        strDate=strCurrentDate('0');
+        intDate=convertStringToInt(strDate);
+    }else if(key=='P'){
+        strDate=strCurrentDate('P');
+        intDate=convertStringToInt(strDate);
+    }
+    startDate=intDate-(intDate%100)+1;
+    return startDate;
+}
+
+string SupportiveMethods::addDashToDate(int intDate){
+    string strDate;
+    strDate=convertIntToStr(intDate);
+    strDate.insert(4,1,'-');
+    strDate.insert(7,1,'-');
+    return strDate;
 }

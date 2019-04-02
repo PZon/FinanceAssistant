@@ -71,6 +71,35 @@ void clFinanceAssistant::addIncome(){
 void clFinanceAssistant::addExpense(){
     expenseManager->addExpense();
 }
+
+void clFinanceAssistant::statementCurrentMonth(){
+    int startDate, endDate;
+    startDate=SupportiveMethods::getDate('C');
+    endDate=startDate+30;
+
+    displayStatement(startDate,endDate);
+};
+
+void clFinanceAssistant::statementPreviousMonth(){
+    int startDate, endDate;
+    startDate=SupportiveMethods::getDate('P');
+    endDate=startDate+30;
+
+    displayStatement(startDate,endDate);
+};
+
+void clFinanceAssistant::statementSpecificPeriod(){
+    int startDate, endDate;
+
+
+    displayStatement(startDate,endDate);
+};
+
+void clFinanceAssistant::displayStatement(int startD, int endD){
+    cout<<"Statement for period from "<<SupportiveMethods::addDashToDate(startD)<<" to "<<SupportiveMethods::addDashToDate(endD)<<endl;
+    incomeManager->displayIncome(startD,endD);
+    expenseManager->displayExpense(startD,endD);
+}
 /*******************************************/
 void clFinanceAssistant::wypiszUzytkownikow(){
     userManager.wypiszUzytkownikow();
