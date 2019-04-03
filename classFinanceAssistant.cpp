@@ -88,10 +88,35 @@ void clFinanceAssistant::statementPreviousMonth(){
 };
 
 void clFinanceAssistant::statementSpecificPeriod(){
-    int startDate, endDate;
+    string startDate, endDate;
+    int strtD, endD;
+    bool veryfication=false;
+    do{
+        cout<<"Enter statement beginning date: "; cin>>startDate;
+        veryfication=SupportiveMethods::verifyUserDate(startDate);
+
+        if(veryfication==true){
+            cout<<"Enter statement end date: "; cin>>endDate;
+            veryfication=SupportiveMethods::verifyUserDate(startDate);
+        }
+        if(veryfication==true){
+            startDate=SupportiveMethods::removePauses(startDate);
+            strtD=SupportiveMethods::convertStringToInt(startDate);
+            endDate=SupportiveMethods::removePauses(endDate);
+            endD=SupportiveMethods::convertStringToInt(endDate);
+            if(strtD>endD)veryfication=false;
+        }
+
+        if(veryfication==false){
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
+            cout<<"\nSorry entered date or period is incorrect!\n";
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
+            system("pause");
+        }
+    }while(veryfication==false);
 
 
-    displayStatement(startDate,endDate);
+    displayStatement(strtD,endD);
 };
 
 void clFinanceAssistant::displayStatement(int startD, int endD){
@@ -100,7 +125,7 @@ void clFinanceAssistant::displayStatement(int startD, int endD){
     expenses=expenseManager->displayExpense(startD,endD);
     sum=incomes-expenses;
     system("cls");
-    cout<<"Statement for period from "<<SupportiveMethods::addDashToDate(startD)<<" to "<<SupportiveMethods::addDashToDate(endD)<<endl;
+    cout<<"Statement for a month begin from: "<<SupportiveMethods::addDashToDate(startD)<<endl;
     incomeManager->displayIncome(startD,endD);
     expenseManager->displayExpense(startD,endD);
 

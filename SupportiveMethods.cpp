@@ -68,6 +68,7 @@ string SupportiveMethods::strCurrentDate(char key){
     else if(key=='0') strDate=strY+strM+strD;
     else if(key=='Y') strDate=strY;
     else if(key=='M') strDate=strM;
+    else if(key=='D') strDate=strD;
     else if(key=='P'){
       if(strMPrev=="00"){
         strMPrev="12";
@@ -108,6 +109,9 @@ bool SupportiveMethods::verifyUserDate(string strUserDate){
             convertStringToInt(strUserMonth)==11&&convertStringToInt(strUserDay)>30)/*cout<<"miesiac>30 dni";*/return false;
     else if(convertStringToInt(strUserYear)==convertStringToInt(strCurrentDate('Y'))&&
             convertStringToInt(strUserMonth)>convertStringToInt(strCurrentDate('M')))/*cout<<"data z przyszlosci";*/return false;
+    else if(convertStringToInt(strUserYear)==convertStringToInt(strCurrentDate('Y'))&&
+            convertStringToInt(strUserMonth)==convertStringToInt(strCurrentDate('M'))&&
+            convertStringToInt(strUserDay)>convertStringToInt(strCurrentDate('D')))/*cout<<"data z przyszlosci";*/return false;
     else if(leapYear(strUserYear)==false && convertStringToInt(strUserMonth)==2&&convertStringToInt(strUserDay)>28){
         /*cout<<"miesiac> 28 dni";*/return false;}
     else if(leapYear(strUserYear)==true && convertStringToInt(strUserMonth)==2&&convertStringToInt(strUserDay)>29){
@@ -139,6 +143,7 @@ bool SupportiveMethods::verifyAmount(string strAmount){
     if(noneDigitNr>1)return false;
     else return true;
 }
+
 string SupportiveMethods::swapCommaWithDot(string strAmount){
     int index=0;
     index=strAmount.find(',');
@@ -154,11 +159,10 @@ int SupportiveMethods::getDate(char key){
 
     if(key=='C'){
         strDate=strCurrentDate('0');
-        intDate=convertStringToInt(strDate);
     }else if(key=='P'){
         strDate=strCurrentDate('P');
-        intDate=convertStringToInt(strDate);
     }
+    intDate=convertStringToInt(strDate);
     startDate=intDate-(intDate%100)+1;
     return startDate;
 }

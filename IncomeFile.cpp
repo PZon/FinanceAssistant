@@ -39,7 +39,6 @@ void IncomeFile::saveIncomeToFile(Income income){
     lastIncomeId++;
 }
 
-
 vector<Income>IncomeFile::uploadIncomesFromFile(int loggedUserId){
     CMarkup xml;
     fstream xmlFile;

@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "Markup.h"
 #include "Income.h"
 #include "SupportiveMethods.h"
