@@ -121,13 +121,11 @@ void clFinanceAssistant::statementSpecificPeriod(){
 
 void clFinanceAssistant::displayStatement(int startD, int endD){
     float incomes, expenses, sum;
+    system("cls");
+    cout<<"Statement for a period begin from: "<<SupportiveMethods::addDashToDate(startD)<<endl;
     incomes=incomeManager->displayIncome(startD,endD);
     expenses=expenseManager->displayExpense(startD,endD);
     sum=incomes-expenses;
-    system("cls");
-    cout<<"Statement for a month begin from: "<<SupportiveMethods::addDashToDate(startD)<<endl;
-    incomeManager->displayIncome(startD,endD);
-    expenseManager->displayExpense(startD,endD);
 
     if(sum>0){
         SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),10);
