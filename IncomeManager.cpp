@@ -77,10 +77,16 @@ Income IncomeManager::enterNewIncomeData(){
             }while(amountVeryfication==false);
         return income;
 }
+/**********************************************/
+struct myclass {
+  bool operator() (Income i,Income j) { return (i.getTransactionDate()<j.getTransactionDate());}
+} sortedIncomes;
+/***************************************************/
 
 float IncomeManager::displayIncome(int startD, int endD){
     float sumIncomes=0.00;
     int intDate; string strDate;
+    sort (incomes.begin(), incomes.end(), sortedIncomes);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),2);
     cout<<"\n\tINCOMES: \n";
     cout<<"Id |    Date    | Description | Amount "<<endl;

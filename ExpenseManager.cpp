@@ -77,10 +77,15 @@ Expense ExpenseManager::enterNewExpenseData(){
             }while(amountVeryfication==false);
         return expense;
 }
-
+/**********************************************/
+struct myclass {
+  bool operator() (Expense i,Expense j) { return (i.getTransactionDate()<j.getTransactionDate());}
+} sortedExpenses;
+/***************************************************/
 float ExpenseManager::displayExpense(int startD, int endD){
     float sumExpenses=0.00;
     int intDate; string strDate;
+    sort (expenses.begin(), expenses.end(), sortedExpenses);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),6);
     cout<<"\tEXPENSES: \n";
     cout<<"Id |    Date    | Description | Amount "<<endl;
@@ -99,3 +104,5 @@ float ExpenseManager::displayExpense(int startD, int endD){
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),7);
     return sumExpenses;
 }
+
+
