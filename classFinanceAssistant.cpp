@@ -17,6 +17,10 @@ void clFinanceAssistant::loginForm(){
 
 void clFinanceAssistant::userLogout(){
     userManager.userLogout();
+    delete incomeManager;
+    delete expenseManager;
+    incomeManager=NULL;
+    expenseManager=NULL;
 }
 bool clFinanceAssistant::ifUserLoggedIn(){
     userManager.ifUserLoggedIn();
@@ -77,7 +81,7 @@ void clFinanceAssistant::statementCurrentMonth(){
     endDate=startDate+30;
 
     displayStatement(startDate,endDate);
-};
+}
 
 void clFinanceAssistant::statementPreviousMonth(){
     int startDate, endDate;
@@ -85,7 +89,7 @@ void clFinanceAssistant::statementPreviousMonth(){
     endDate=startDate+30;
 
     displayStatement(startDate,endDate);
-};
+}
 
 void clFinanceAssistant::statementSpecificPeriod(){
     string startDate, endDate;
@@ -117,12 +121,12 @@ void clFinanceAssistant::statementSpecificPeriod(){
 
 
     displayStatement(strtD,endD);
-};
+}
 
 void clFinanceAssistant::displayStatement(int startD, int endD){
     float incomes, expenses, sum;
     system("cls");
-    cout<<"Statement for a period begin from: "<<SupportiveMethods::addDashToDate(startD)<<endl;
+    cout<<"Statement for a period begins from: "<<SupportiveMethods::addDashToDate(startD)<<endl;
     incomes=incomeManager->displayIncome(startD,endD);
     expenses=expenseManager->displayExpense(startD,endD);
     sum=incomes-expenses;
