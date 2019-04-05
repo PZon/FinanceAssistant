@@ -1,5 +1,5 @@
 #include <iostream>
-#include "classFinanceAssistant.h"
+#include "FinanceAssistant.h"
 
 using namespace std;
 
@@ -101,7 +101,7 @@ void clFinanceAssistant::statementSpecificPeriod(){
 
         if(veryfication==true){
             cout<<"Enter statement end date: "; cin>>endDate;
-            veryfication=SupportiveMethods::verifyUserDate(startDate);
+            veryfication=SupportiveMethods::verifyUserDate(endDate);
         }
         if(veryfication==true){
             startDate=SupportiveMethods::removePauses(startDate);

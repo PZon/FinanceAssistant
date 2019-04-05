@@ -1,5 +1,5 @@
 #include <iostream>
-#include "classFinanceAssistant.h"
+#include "FinanceAssistant.h"
 
 using namespace std;
 

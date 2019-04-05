@@ -1,4 +1,6 @@
-Finance*
+*.depend
+*.layout
+*.cbp
 bin/
 obj/
 *xml
